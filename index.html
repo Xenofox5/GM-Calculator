@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GM Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="stage">
+
+    <!-- HERO -->
+    <section id="hero" class="screen active">
+      <div class="hero-card">
+        <h1 class="brand">GM Calculator</h1>
+        <p class="tag">A precise estimate of your chance of achieving General Merit</p>
+        <button id="startBtn" class="btn primary">Start</button>
+      </div>
+    </section>
+
+    <!-- APP / stepper -->
+    <section id="app" class="screen hidden" aria-hidden="true">
+      <div class="app-card">
+        <div class="stepper">
+          <div class="step active" data-step="1">Core</div>
+          <div class="step" data-step="2">Academic</div>
+          <div class="step" data-step="3">Other</div>
+          <div class="step" data-step="4">PE</div>
+          <div class="step" data-step="5">Final</div>
+        </div>
+
+        <form id="marksForm" autocomplete="off" novalidate>
+          <!-- STEP 1: Core -->
+          <div class="page" data-step="1">
+            <h2>Core subjects</h2>
+            <p class="helper">Whole numbers only. Term 3 is optional.</p>
+
+            <div class="row">
+              <label>English</label>
+              <input id="engT1" type="number" step="1" min="0" placeholder="T1">
+              <input id="engT1Max" class="max" value="25" disabled>
+              <input id="engT2" type="number" step="1" min="0" placeholder="T2">
+              <input id="engT2Max" class="max" value="25" disabled>
+              <input id="engT3" type="number" step="1" min="0" placeholder="T3">
+              <input id="engT3Max" class="max" value="25" disabled>
+            </div>
+
+            <div class="row">
+              <label>Maths</label>
+              <input id="mathT1" type="number" disabled placeholder="—">
+              <input id="mathT1Max" class="max" disabled value="">
+              <input id="mathT2" type="number" step="1" min="0" placeholder="T2">
+              <input id="mathT2Max" class="max" value="40" disabled>
+              <input id="mathT3" type="number" step="1" min="0" placeholder="T3">
+              <input id="mathT3Max" class="max" value="20" disabled>
+            </div>
+
+            <div class="row">
+              <label>Science</label>
+              <input id="sciT1" type="number" step="1" min="0" placeholder="T1">
+              <input id="sciT1Max" class="max" value="20" disabled>
+              <input id="sciT2" type="number" step="1" min="0" placeholder="T2">
+              <input id="sciT2Max" class="max" value="30" disabled>
+              <input id="sciT3" type="number" step="1" min="0" placeholder="T3">
+              <input id="sciT3Max" class="max" value="20" disabled>
+            </div>
+
+            <div class="nav">
+              <button type="button" class="btn" data-action="next">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Academic Electives -->
+          <div class="page hidden" data-step="2">
+            <h2>Academic electives</h2>
+            <p class="helper">Enter scores and the Out-of values (Out-of must be 1..50).</p>
+
+            <div class="row">
+              <label>Academic elective 1</label>
+              <input id="ac1T1" type="number" step="1" min="0" placeholder="T1">
+              <input id="ac1T1Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="ac1T2" type="number" step="1" min="0" placeholder="T2">
+              <input id="ac1T2Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="ac1T3" type="number" step="1" min="0" placeholder="T3">
+              <input id="ac1T3Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+            </div>
+
+            <div class="row">
+              <label>Academic elective 2</label>
+              <input id="ac2T1" type="number" step="1" min="0" placeholder="T1">
+              <input id="ac2T1Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="ac2T2" type="number" step="1" min="0" placeholder="T2">
+              <input id="ac2T2Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="ac2T3" type="number" step="1" min="0" placeholder="T3">
+              <input id="ac2T3Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+            </div>
+
+            <div class="nav">
+              <button type="button" class="btn" data-action="prev">Back</button>
+              <button type="button" class="btn" data-action="next">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Other Electives -->
+          <div class="page hidden" data-step="3">
+            <h2>Other electives</h2>
+            <p class="helper">Optional. Enter Out-of totals for each term (≤ 50) to calculate accurately.</p>
+
+            <div class="row">
+              <label>Other elective 1</label>
+              <input id="oe1T1" type="number" step="1" min="0" placeholder="T1">
+              <input id="oe1T1Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="oe1T2" type="number" step="1" min="0" placeholder="T2">
+              <input id="oe1T2Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="oe1T3" type="number" step="1" min="0" placeholder="T3">
+              <input id="oe1T3Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+            </div>
+
+            <div class="row">
+              <label>Other elective 2</label>
+              <input id="oe2T1" type="number" step="1" min="0" placeholder="T1">
+              <input id="oe2T1Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="oe2T2" type="number" step="1" min="0" placeholder="T2">
+              <input id="oe2T2Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+              <input id="oe2T3" type="number" step="1" min="0" placeholder="T3">
+              <input id="oe2T3Max" class="maxEditable" type="number" step="1" min="1" placeholder="Out of">
+            </div>
+
+            <div class="nav">
+              <button type="button" class="btn" data-action="prev">Back</button>
+              <button type="button" class="btn" data-action="next">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: PE -->
+          <div class="page hidden" data-step="4">
+            <h2>PE</h2>
+
+            <div class="row">
+              <label>PE</label>
+              <input id="peT1" type="number" step="1" min="0" placeholder="T1">
+              <input id="peT1Max" class="max" value="25" disabled>
+              <input id="peT2" type="number" step="1" min="0" placeholder="T2">
+              <input id="peT2Max" class="max" value="35" disabled>
+              <input id="peT3" type="number" step="1" min="0" placeholder="T3">
+              <input id="peT3Max" class="max" value="25" disabled>
+            </div>
+
+            <div class="nav">
+              <button type="button" class="btn" data-action="prev">Back</button>
+              <button id="toFinal" type="button" class="btn primary">Go to final</button>
+            </div>
+          </div>
+
+          <!-- STEP 5: FINAL -->
+          <div class="page hidden" data-step="5">
+            <h2>Final check</h2>
+            <p class="helper">If any inputs are red, fix them. Term 1 and Term 2 are required for core, academic electives and PE. Term 3 is optional.</p>
+
+            <div class="nav">
+              <button type="button" class="btn" data-action="prev">Back</button>
+              <button id="calcBtn" type="button" class="btn primary large">Calculate GM chance</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- LOADING overlay -->
+      <div id="loadingOverlay" class="overlay hidden" aria-hidden="true">
+        <div class="loading-card" role="status" aria-live="polite">
+          <div id="loadingMsg" class="loading-msg">Preparing...</div>
+          <div class="loading-bar"><div id="loadingFill"></div></div>
+        </div>
+      </div>
+
+      <!-- RESULT overlay -->
+      <div id="resultOverlay" class="overlay hidden" aria-hidden="true">
+        <div class="result-card">
+          <div id="resultMain" class="result-main"></div>
+          <div id="resultSub" class="result-sub muted"></div>
+          <div class="result-actions">
+            <button id="restartBtn" class="btn">Reset</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
