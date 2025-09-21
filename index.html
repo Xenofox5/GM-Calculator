@@ -10,12 +10,18 @@
 <body>
   <div class="stage">
 
-    <!-- HERO -->
+    <!-- HERO with required name -->
     <section id="hero" class="screen active">
       <div class="hero-card">
         <h1 class="brand">GM Calculator</h1>
         <p class="tag">A precise estimate of your chance of achieving General Merit</p>
-        <button id="startBtn" class="btn primary">Start</button>
+
+        <div style="margin:12px 0;">
+          <input id="initName" type="text" placeholder="Enter your name (required)" maxlength="100"
+                 style="width:360px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:var(--glass);color:#eaf6ff">
+        </div>
+
+        <button id="startBtn" class="btn primary" disabled>Start</button>
       </div>
     </section>
 
@@ -31,6 +37,9 @@
         </div>
 
         <form id="marksForm" autocomplete="off" novalidate>
+
+          <!-- (No separate name input here — name required at start) -->
+
           <!-- STEP 1: Core -->
           <div class="page" data-step="1">
             <h2>Core subjects</h2>
@@ -105,7 +114,7 @@
           <!-- STEP 3: Other Electives -->
           <div class="page hidden" data-step="3">
             <h2>Other electives</h2>
-            <p class="helper">Optional. Enter Out-of totals for each term (≤ 50) to calculate accurately.</p>
+            <p class="helper">Enter Out-of totals for each term (≤ 50).</p>
 
             <div class="row">
               <label>Other elective 1</label>
@@ -156,7 +165,7 @@
           <!-- STEP 5: FINAL -->
           <div class="page hidden" data-step="5">
             <h2>Final check</h2>
-            <p class="helper">If any inputs are red, fix them. Term 1 and Term 2 are required for core, academic electives and PE. Term 3 is optional.</p>
+            <p class="helper">If any inputs are red, fix them. Term 1 and Term 2 are required for core, academic electives, other electives and PE. Term 3 is optional.</p>
 
             <div class="nav">
               <button type="button" class="btn" data-action="prev">Back</button>
@@ -166,16 +175,16 @@
         </form>
       </div>
 
-      <!-- LOADING overlay -->
-      <div id="loadingOverlay" class="overlay hidden" aria-hidden="true">
+      <!-- LOADING overlay (opaque) -->
+      <div id="loadingOverlay" class="overlay hidden" aria-hidden="true" style="background: rgba(7,16,23,0.95);">
         <div class="loading-card" role="status" aria-live="polite">
           <div id="loadingMsg" class="loading-msg">Preparing...</div>
           <div class="loading-bar"><div id="loadingFill"></div></div>
         </div>
       </div>
 
-      <!-- RESULT overlay -->
-      <div id="resultOverlay" class="overlay hidden" aria-hidden="true">
+      <!-- RESULT overlay (opaque) -->
+      <div id="resultOverlay" class="overlay hidden" aria-hidden="true" style="background: rgba(7,16,23,0.95);">
         <div class="result-card">
           <div id="resultMain" class="result-main"></div>
           <div id="resultSub" class="result-sub muted"></div>
@@ -189,6 +198,8 @@
 
   </div>
 
+  <!-- Supabase client (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
